@@ -1,5 +1,11 @@
 public class sortingTest{
 
+  public static void displayArray(int[] arr){
+    for (int i = 0; i < arr.length; i++)
+      System.out.printf("%d ", arr[i]);
+    System.out.println();
+  }
+
   public static void main(String[] args) {
     int[] arr = {12, 37, 6, 14, 25, 34, 17};
 
@@ -11,9 +17,11 @@ public class sortingTest{
           arr[j] = temp;
         }
       }
+      displayArray(arr);
     }
 
-    for (int i = 0; i < arr.length; i++)
-      System.out.println(arr[i]);
+    System.out.println("Final Array:");
+
+    displayArray(arr);
   }
 }
