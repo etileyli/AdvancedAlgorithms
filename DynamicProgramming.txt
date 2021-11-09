@@ -31,4 +31,17 @@ Dynamic programming is generally the right method for optimization problems
 on combinatorial objects that have an inherent left to right order among components.
 Left-to-right objects includes: character strings, rooted trees, polygons, and
 integer sequences. Dynamic programming is best learned by carefully studying
-examples until things start to click. 
+examples until things start to click.
+
+This general method of explicitly caching results from recursive calls to avoid
+recomputation provides a simple way to get most of the benefits of full dynamic
+programming, so it is worth a more careful look.In principle, such caching can be
+employed on any recursive algorithm. However, storing partial results would have
+done absolutely no good for such recursive algorithms as quicksort, backtracking,
+and depth-first search because all the recursive calls made in these algorithms have
+distinct parameter values. It doesn’t pay to store something you will never refer to
+again.
+
+Take-Home Lesson: Explicit caching of the results of recursive calls provides
+most of the benefits of dynamic programming, including usually the same
+running time as the more elegant full solution.
