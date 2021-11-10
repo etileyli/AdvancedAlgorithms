@@ -6,16 +6,11 @@ public class sortingTest{
     System.out.println();
   }
 
-  public static void main(String[] args) {
-    int[] arr = {12, 37, 6, 14, 25, 34, 17};
-    // int[] arr = {5, 2, 4, 6, 1, 3};
-
-    displayArray(arr);
-    System.out.println("");
+  public static void insertionSort(int[] arr){
 
     for (int i = 1; i < arr.length; i++){
       for (int j = i; j > 0; j--){
-        System.out.printf("i = %d\n", i);
+        System.out.printf("i = %d, ", i);
         System.out.printf("j = %d\n", j);
         if (arr[j] < arr[j-1]){
           int temp = arr[j];
@@ -31,9 +26,19 @@ public class sortingTest{
       }
       // displayArray(arr);
     }
+  }
+
+  public static void main(String[] args) {
+    // int[] arr = {12, 37, 6, 14, 25, 34, 17};
+    int[] arr = {5, 2, 4, 6, 1, 3};
+
+    System.out.println("Initial Array:");
+    displayArray(arr);
+    System.out.println("");
+
+    insertionSort(arr);
 
     System.out.println("Final Array:");
-
     displayArray(arr);
   }
 }
