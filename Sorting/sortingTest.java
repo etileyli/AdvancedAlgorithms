@@ -50,47 +50,67 @@ public class sortingTest{
     }
   }
 
-  public static int[] mergeSort(int[] arr)
-  {
-    int[] subArr_1 = Arrays.copyOfRange(arr, 0, arr.length/2);
-    int[] subArr_2 = Arrays.copyOfRange(arr, arr.length/2, arr.length);
+  public static void merge(int Arr[], int start, int mid, int end) {
 
-    if (subArr_1.length == 1 || subArr_2.length == 1){
-      displayArray(subArr_1);
-      displayArray(subArr_2);
-      return arr;
-    }
+  	// create a temp array
+  	int temp[] = new int[end - start + 1];
 
-    subArr_1 = mergeSort(subArr_1);
-    displayArray(subArr_1);
-    subArr_2 = mergeSort(subArr_2);
-    displayArray(subArr_2);
+  	// crawlers for both intervals and for temp
+  	int i = start, j = mid+1, k = 0;
 
-    int[] tempArr = new int[subArr_1.length + subArr_2.length];
-    int i = 0, j = 0, k = 0, counter = 0;
+  	// traverse both arrays and in each iteration add smaller of both elements in temp
+  	while(i <= mid && j <= end) {
+  		if(Arr[i] <= Arr[j]) {
+  			temp[k] = Arr[i];
+  			k += 1; i += 1;
+  		}
+  		else {
+  			temp[k] = Arr[j];
+  			k += 1; j += 1;
+  		}
+  	}
 
-    System.out.printf("Length of tempArr = %d\n", tempArr.length);
-    while( (i < subArr_1.length + subArr_2.length) && (j < subArr_1.length ) && (k < subArr_2.length)){
-      // System.out.printf("i: %d, j: %d, k: %d\n", i, j, k);
-      if (subArr_1[j] < subArr_2[k])
-        tempArr[i++] = subArr_1[j++];
-      else
-        tempArr[i++] = subArr_2[k++];
-      System.out.printf("i: %d, j: %d, k: %d\n", i, j, k);
-    }
+  	// add elements left in the first interval
+  	while(i <= mid) {
+  		temp[k] = Arr[i];
+  		k += 1; i += 1;
+  	}
 
-    // System.out.printf("i: %d\n", i);
+  	// add elements left in the second interval
+  	while(j <= end) {
+  		temp[k] = Arr[j];
+  		k += 1; j += 1;
+  	}
 
-    System.out.println("tempArr");
-    displayArray(tempArr);
-    return tempArr;
+  	// copy temp to original interval
+  	for(i = start; i <= end; i += 1) {
+  		Arr[i] = temp[i - start];
+  	}
+  }
+
+  // Arr is an array of integer type
+  // start and end are the starting and ending index of current interval of Arr
+
+  public static void mergeSort(int Arr[], int start, int end) {
+
+  	if(start < end) {
+  		int mid = (start + end) / 2;
+  		mergeSort(Arr, start, mid);
+      // displayArray(Arr);
+  		mergeSort(Arr, mid+1, end);
+      // displayArray(Arr);
+  		merge(Arr, start, mid, end);
+      displayArray(Arr);
+
+  	}
   }
 
   public static void main(String[] args) {
     // int[] arr = {12, 37, 6, 14, 25, 34, 17};
     // int[] arr = {5, 2, 4, 6, 1, 3};
 
-    int[] arr = {12, 37, 14, 6, 34, 25, 17, 23};
+    // int[] arr = {12, 37, 14, 6, 34, 25, 17, 23};
+    int[] arr = {37, 12, 14, 6, 34, 25, 23, 17};
 
 
     System.out.println("Initial Array:");
@@ -99,7 +119,8 @@ public class sortingTest{
 
     // insertionSort(arr);
     // insertionSortDecreasingOrder(arr);
-    arr = mergeSort(arr);
+    // arr = NOT_WORKING_mergeSort(arr);
+    // mergeSort(arr, 0, 7);
 
     System.out.println("Final Array:");
     displayArray(arr);
